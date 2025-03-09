@@ -9,6 +9,7 @@ def depositar(valor, saldo, extrato, /):
     if valor > 0:
         saldo += valor
         extrato += f"Depósito: R$ {valor:.2f}\n"
+        print(f"\nDepósito de R$ {valor:.2f} realizado com sucesso!")
     else:
         print(MENSAGEM_VALOR_INVALIDO)
     return saldo, extrato
@@ -28,6 +29,7 @@ def sacar(*, valor, saldo, extrato, numero_saques, limite, LIMITE_SAQUES):
         saldo -= valor
         extrato += f"Saque: R$ {valor:.2f}\n"
         numero_saques += 1
+        print(f"\nSaque de R$ {valor:.2f} realizado com sucesso!")
     else:
         print(MENSAGEM_VALOR_INVALIDO)
     
@@ -66,6 +68,7 @@ def criar_ususario(usuarios):
     endereco = input("Informe o endereço (logadouro, nro - bairro - cidade/sigla Estado): ")
 
     usuarios.append({"nome": nome, "cpf": cpf, "data_nascimento": data_nascimento, "endereco": endereco})
+    print(f"\nUsuário {nome} cadastrado com sucesso!")
 
 def criar_conta(agencia, numero_conta, usuarios):
     cpf = input("Informe o CPF: ")
@@ -75,11 +78,14 @@ def criar_conta(agencia, numero_conta, usuarios):
         print(MENSAGEM_USUARIO_NAO_ENCONTRADO)
         return
 
+    print(f"\nConta criada com sucesso! Agência: {agencia}, Conta: {numero_conta}, Titular: {usuario['nome']}")
     return {"agencia": agencia, "numero_conta": numero_conta, "usuario": usuario}
 
 def listar_contas(contas):
+    print("\n================ CONTAS ================")
     for conta in contas:
         print(f"Agência: {conta['agencia']} - Conta: {conta['numero_conta']} - Titular: {conta['usuario']['nome']}")
+    print("========================================")
 
 def main():
     saldo = 0
@@ -135,6 +141,7 @@ def main():
             listar_contas(contas)
 
         elif opcao == "q":
+            print("\nObrigado por usar nosso sistema bancário. Até a próxima!")
             break
 
         else:
